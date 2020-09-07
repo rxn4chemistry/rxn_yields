@@ -1,0 +1,11 @@
+{
+  "rxn_yields": {
+    "Overview": "/",
+    "Core": "core",
+    "Data": "data",
+    "Training Tutorial": "model_training",
+    "Evaluation Buchwald Hartwig": "results_evaluation_of_buchwald_hartwig_yields_prediction",
+    "Evaluation Suzuki Miyaura": "results_evaluation_of_suzuki_miyaura_yields_prediction",
+    "USPTO Exploration": "uspto_data_exploration"
+  }
+}
