@@ -41,7 +41,7 @@ nb_path: "nbs/04_results_evaluation_of_suzuki_miyaura_yields_prediction.ipynb"
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">rxn_yields.core</span> <span class="kn">import</span> <span class="n">SmilesTokenizer</span><span class="p">,</span> <span class="n">SmilesClassificationModel</span>
+<span class="kn">from</span> <span class="nn">rxnfp.models</span> <span class="kn">import</span> <span class="n">SmilesClassificationModel</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -62,10 +62,19 @@ nb_path: "nbs/04_results_evaluation_of_suzuki_miyaura_yields_prediction.ipynb"
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-blue-intense-fg ansi-bold">wandb</span>: <span class="ansi-yellow-fg">WARNING</span> W&amp;B installed but not logged in.  Run `wandb login` or set the WANDB_API_KEY env variable.
+This extension has only been tested with simpletransformers==0.34.4
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
+<pre>True</pre>
 </div>
 
 </div>
