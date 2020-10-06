@@ -2,7 +2,7 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"SmilesClassificationModel": "00_core.ipynb",
+index = {"canonicalize_with_dict": "01_data.ipynb",
          "generate_buchwald_hartwig_rxns": "01_data.ipynb"}
 
 modules = ["core.py",
