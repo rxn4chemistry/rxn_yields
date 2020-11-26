@@ -3,10 +3,16 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"canonicalize_with_dict": "01_data.ipynb",
-         "generate_buchwald_hartwig_rxns": "01_data.ipynb"}
+         "generate_buchwald_hartwig_rxns": "01_data.ipynb",
+         "randomize_smiles": "06_data_augmentation.ipynb",
+         "precursor_permutation_given_index": "06_data_augmentation.ipynb",
+         "randomize_rxn": "06_data_augmentation.ipynb",
+         "do_randomizations_on_df": "06_data_augmentation.ipynb",
+         "do_random_permutations_on_df": "06_data_augmentation.ipynb"}
 
 modules = ["core.py",
-           "data.py"]
+           "data.py",
+           "augmentation.py"]
 
 doc_url = "https://rxn4chemistry.github.io/rxn_yields/"
 
