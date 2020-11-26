@@ -93,7 +93,7 @@ On random splits 70/30 in a), the data augmented Yield-BERT models perform bette
 <p style="text-align: center;"> <b>Figure:</b> Test-time augmetation.</p>
 </div>
 
-A typical non-bayesian way of estimating epistemic uncertainty, is to take predictions of models trained with a different seed. Here, we explore different strategy which requires a single model, namely, test-time augmentation. At test-time, we generate multiple augmented versions of the same input and then, average the prediction of the same model and take the standard deviation as uncertainty estimate. 
+A typical non-bayesian way of estimating epistemic uncertainty, is to take predictions of models trained with different seeds. Here, we explore a different strategy which requires a single model, namely, test-time augmentation. At test-time, we generate multiple augmented versions of the same input and then, average the prediction of the same model and take the standard deviation as uncertainty estimate. 
 
 
 <div style="text-align: center">
@@ -139,7 +139,7 @@ We performed different experiments using random and time splits on the reaction 
 
 ## Citation
 
-If you found this repo useful, please cite our the following preprints:
+If you found this repo useful, please cite the following preprints:
 [Yield-BERT](https://chemrxiv.org/articles/preprint/Prediction_of_Chemical_Reaction_Yields_using_Deep_Learning/12758474).
 
 ```

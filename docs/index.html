@@ -138,7 +138,7 @@ pip install -e .</code></pre>
 <h4 id="Test-time-augmentation">Test-time-augmentation<a class="anchor-link" href="#Test-time-augmentation"> </a></h4><div style="text-align: center">
 {% include image.html max-width="800" file="/rxn_yields/images/testtime_augmentation.png" %}
 <p style="text-align: center;"> <b>Figure:</b> Test-time augmetation.</p>
-</div><p>A typical non-bayesian way of estimating epistemic uncertainty, is to take predictions of models trained with a different seed. Here, we explore different strategy which requires a single model, namely, test-time augmentation. At test-time, we generate multiple augmented versions of the same input and then, average the prediction of the same model and take the standard deviation as uncertainty estimate.</p>
+</div><p>A typical non-bayesian way of estimating epistemic uncertainty, is to take predictions of models trained with different seeds. Here, we explore a different strategy which requires a single model, namely, test-time augmentation. At test-time, we generate multiple augmented versions of the same input and then, average the prediction of the same model and take the standard deviation as uncertainty estimate.</p>
 <div style="text-align: center">
 {% include image.html max-width="800" file="/rxn_yields/images/uncertainty.png" %}
 <p style="text-align: center;"> <b>Figure:</b> a) Spearman's rank correlation coefficient with increasing number of test time augmentations. b) Predictions and uncertainty on random split 01 with 2.5% and 70% training data using a fixed molecule order and 10 SMILES randomizations (randomized). c) Out-of-sample test set predictions using a fixed molecule order and 10 SMILES randomizations (randomized). Uncertainty scale was kept the same for all plots and capped at 4.0. MAE = mean average error, RMSE = root mean squared error, UQ = spearman's coefficient $\rho$.</p>
@@ -189,7 +189,7 @@ pip install -e .</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you found this repo useful, please cite our the following preprints:
+<p>If you found this repo useful, please cite the following preprints:
 <a href="https://chemrxiv.org/articles/preprint/Prediction_of_Chemical_Reaction_Yields_using_Deep_Learning/12758474">Yield-BERT</a>.</p>
 
 <pre><code>@article{Schwaller2020yields,
