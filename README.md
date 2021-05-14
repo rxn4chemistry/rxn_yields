@@ -4,7 +4,7 @@
 
 Artificial intelligence is driving one of the most important revolutions in organic chemistry. Multiple platforms, including tools for reaction prediction and synthesis planning based on machine learning, successfully became part of the organic chemists’ daily laboratory, assisting in domain-specific synthetic problems. Unlike reaction prediction and retrosynthetic models, reaction yields models have been less investigated, despite the enormous potential of accurately predicting them. Reaction yields models, describing the percentage of the reactants that is converted to the desired products, could guide chemists and help them select high-yielding reactions and score synthesis routes, reducing the number of attempts. So far, yield predictions have been predominantly performed for high-throughput experiments using a categorical (one-hot) encoding of reactants, concatenated molecular fingerprints, or computed chemical descriptors. Here, we extend the application of natural language processing architectures to predict reaction properties given a text-based representation of the reaction, using an encoder transformer model combined with a regression layer. We demonstrate outstanding prediction performance on two high-throughput experiment reactions sets. An analysis of the yields reported in the open-source USPTO data set shows that their distribution differs depending on the mass scale, limiting the dataset applicability in reaction yields predictions.
 
-This repository complements our studies on [predicting chemical reaction yields](https://chemrxiv.org/articles/preprint/Prediction_of_Chemical_Reaction_Yields_using_Deep_Learning/12758474) and [data augmentation and uncertainty estimation for yield predictions](https://doi.org/10.26434/chemrxiv.13286741).
+This repository complements our studies on [predicting chemical reaction yields](https://iopscience.iop.org/article/10.1088/2632-2153/abc81d) (published in Machine Learning: Science and Technology) and [data augmentation and uncertainty estimation for yield predictions](https://doi.org/10.26434/chemrxiv.13286741) (presented at the Machine Learning for Molecules Workshop at NeurIPS 2020).
 
 ## Install
 
@@ -22,6 +22,13 @@ git clone https://github.com/rxn4chemistry/rxn_yields.git
 cd rxn_yields
 pip install -e .
 ```
+
+---
+**NOTE:**
+
+If you are fine-tuning your own models. Make sure that the pretrained model (from which you start training) is loaded from a folder with the same structure as for our [rxnfp models](https://github.com/rxn4chemistry/rxnfp/tree/master/rxnfp/models/transformers/bert_pretrained).
+
+---
 
 ## Approach - predicting yields from reaction SMILES
 
@@ -47,7 +54,7 @@ Here we asked the question, how well a **BERT** model would perform when applied
 
 
 <div style="text-align: center">
-<img src="nbs/images/pipeline.jpg" width="800">
+<img src="nbs/images/pipeline.jpg" width="800" style="max-width: 800px">
 <p style="text-align: center;"> <b>Figure:</b> Pipeline and task description. </p>
 </div>
 
@@ -62,7 +69,7 @@ We explored two high-throughput experiment (HTE) data sets and then also the yie
 One of the best studied reaction yield is the one that was published by Ahneman et al. in [Predicting reaction performance in C–N cross-coupling using machine learning](https://science.sciencemag.org/content/360/6385/186.full), where the authors have used DFT-computed descriptors as inputs to different machine learning descriptors. There best model was a random forest model. More recently, [one-hot encodings](https://science.sciencemag.org/content/362/6416/eaat8603) and [multi-fingerprint features (MFF)](https://www.sciencedirect.com/science/article/pii/S2451929420300851) as input representations were investigated. Here, we show competitive results starting simply from a text-based reaction SMILES input to our models.
 
 <div style="text-align: center">
-<img src="nbs/images/buchwald_hartwig.jpg" width="800">
+<img src="nbs/images/buchwald_hartwig.jpg" width="800" style="max-width: 800px">
 <p style="text-align: center;"> <b>Figure:</b> a) Summary of the results on the Buchwald–Hartwig data set. b) Example regression plot for the first random-split. </p>
 </div>
 
@@ -71,14 +78,14 @@ One of the best studied reaction yield is the one that was published by Ahneman 
 We were able to further improve the results on this data set using data augmentation on reaction SMILES (molecule order permuations and SMILES randomisations). This extension will be presented at the NeurIPS 2020 [Machine Learning for Molecules Workshop](https://nips.cc/Conferences/2020/ScheduleMultitrack?event=16136).
 
 <div style="text-align: center">
-<img src="nbs/images/rxn_randomizations.png" width="800">
+<img src="nbs/images/rxn_randomizations.png" width="800" style="max-width: 800px">
 <p style="text-align: center;"> <b>Figure:</b> The two different data augmentation techniques investigated in the NeurIPS workshop paper. </p>
 </div>
 
 #### Results
 
 <div style="text-align: center">
-<img src="nbs/images/results_augm.png" width="800">
+<img src="nbs/images/results_augm.png" width="800" style="max-width: 800px">
 <p style="text-align: center;"> <b>Figure:</b> a) Results on the 70/30 random splits, averaged over 10 splits. b) Comparison of DFT descriptors + RF, canonical SMILES and data augmented randomized SMILES on reduced training sets. c) Out-of-sample test sets</p>
 </div>
 
@@ -89,7 +96,7 @@ On random splits 70/30 in a), the data augmented Yield-BERT models perform bette
 
 
 <div style="text-align: center">
-<img src="nbs/images/testtime_augmentation.png" width="800">
+<img src="nbs/images/testtime_augmentation.png" width="800" style="max-width: 800px">
 <p style="text-align: center;"> <b>Figure:</b> Test-time augmetation.</p>
 </div>
 
@@ -97,7 +104,7 @@ A typical non-bayesian way of estimating epistemic uncertainty, is to take predi
 
 
 <div style="text-align: center">
-<img src="nbs/images/uncertainty.png" width="800">
+<img src="nbs/images/uncertainty.png" width="800" style="max-width: 800px">
 <p style="text-align: center;"> <b>Figure:</b> a) Spearman's rank correlation coefficient with increasing number of test time augmentations. b) Predictions and uncertainty on random split 01 with 2.5% and 70% training data using a fixed molecule order and 10 SMILES randomizations (randomized). c) Out-of-sample test set predictions using a fixed molecule order and 10 SMILES randomizations (randomized). Uncertainty scale was kept the same for all plots and capped at 4.0. MAE = mean average error, RMSE = root mean squared error, UQ = spearman's coefficient $\rho$.</p>
 </div>
 
@@ -108,7 +115,7 @@ We show that the uncertainty estimates correlate with the error, even for out-of
 Another yield data set is the one of Perera et al. from [A platform for automated nanomole-scale reaction screening and micromole-scale synthesis in flow](https://science.sciencemag.org/content/359/6374/429). Using 10 random splits, we demonstrate that the hyperparameters optimised on the Buchwald-Hartwig were transferable to a different HTE reaction data set.
 
 <div style="text-align: center">
-<img src="nbs/images/suzuki_miyaura.jpg" width="600">
+<img src="nbs/images/suzuki_miyaura.jpg" width="600" style="max-width: 600px">
 <p style="text-align: center;"> <b>Figure:</b> Summary of the results on the Suzuki-Miyaura data set, using the hyperparameters of the Buchwald-Hartwig reactions (3.1) and those tune on one of the random splits. </p>
 </div>
 
@@ -117,7 +124,7 @@ Another yield data set is the one of Perera et al. from [A platform for automate
 Training on a reduced part of the training set containing 5%, 10% 20% of the data, we show that the models are already able to find high-yielding reactions in the remaining data set. 
 
 <div style="text-align: center">
-<img src="nbs/images/reaction_discovery.jpg" width="700">
+<img src="nbs/images/reaction_discovery.jpg" width="700" style="max-width: 700px">
 <p style="text-align: center;"> <b>Figure:</b> Average and standard deviation of the yields for the 10, 50, and 100 reactions predicted to have the highest yields after training on a fraction of the data set (5%, 10%, 20%). The ideal reaction selection and a random selection are plotted for comparison. </p>
 </div>
 
@@ -126,30 +133,32 @@ Training on a reduced part of the training set containing 5%, 10% 20% of the dat
 The [largest public reaction data](https://figshare.com/articles/Chemical_reactions_from_US_patents_1976-Sep2016_/5104873) set was text-mined from the US patents by Lowe. There are numerous reasons why yield data in patents is noisy. Therefore, it the data set is not ideal for a yield prediction task. Using Reaction Atlases, made with the tutorial shown in [rxnfp](https://rxn4chemistry.github.io/rxnfp/), we show that while general yield trends exists. The local reaction neighbourhoods are very noisy and better quality data would be required.
 
 <div style="text-align: center">
-<img src="nbs/images/tmaps_uspto.jpg" width="700">
+<img src="nbs/images/tmaps_uspto.jpg" width="700" style="max-width: 700px">
 <p style="text-align: center;"> <b>Figure:</b> Superclasses, yields and yield distribution of the reactions in the USPTO data set divided into gram and subgram scale. </p>
 </div>
 
 We performed different experiments using random and time splits on the reaction data. As a sanity check, we compared the results to the one where we randomise the yields of the reactions. In one of the experiments, we smoothed the yield data taking the average of twice its own yield plus the yields of the three nearest-neighbours. This procedure could potentially improve the data set quality by smoothing out originating from (human) errors. Accordingly, the results of the Yield-BERT on the smoothed data set are better than on the original yields. 
 
 <div style="text-align: center">
-<img src="nbs/images/uspto.jpg" width="500">
+<img src="nbs/images/uspto.jpg" width="500" style="max-width: 500px">
 <p style="text-align: center;"> <b>Figure:</b> Summary of the results on the USPTO data sets. </p>
 </div>
 
 ## Citation
 
-If you found this repo useful, please cite the following preprints:
-[Yield-BERT](https://chemrxiv.org/articles/preprint/Prediction_of_Chemical_Reaction_Yields_using_Deep_Learning/12758474).
+If you found this repo useful, please cite the following publication:
+[Yield-BERT](https://iopscience.iop.org/article/10.1088/2632-2153/abc81d).
 
 ```
-@article{Schwaller2020yields,
-author = "Philippe Schwaller and Alain C. Vaucher and Teodoro Laino and Jean-Louis Reymond",
-title = "{Prediction of Chemical Reaction Yields using Deep Learning}",
-year = "2020",
-month = "8",
-url = "https://chemrxiv.org/articles/preprint/Prediction_of_Chemical_Reaction_Yields_using_Deep_Learning/12758474",
-doi = "10.26434/chemrxiv.12758474.v1"
+@article{schwaller2021prediction,
+  title={Prediction of chemical reaction yields using deep learning},
+  author={Schwaller, Philippe and Vaucher, Alain C and Laino, Teodoro and Reymond, Jean-Louis},
+  journal={Machine Learning: Science and Technology},
+  volume={2},
+  number={1},
+  pages={015016},
+  year={2021},
+  publisher={IOP Publishing}
 }
 ```
 

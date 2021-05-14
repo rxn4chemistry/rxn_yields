@@ -11,7 +11,7 @@ import pandas as pd
 from rdkit import Chem
 
 # Cell
-def randomize_smiles(smiles, random_type="rotated"):
+def randomize_smiles(smiles, random_type="rotated", isomericSmiles=True):
     """
     From: https://github.com/undeadpixel/reinvent-randomized and https://github.com/GLambard/SMILES-X
     Returns a random SMILES given a SMILES of a molecule.
@@ -24,19 +24,19 @@ def randomize_smiles(smiles, random_type="rotated"):
         return None
 
     if random_type == "unrestricted":
-        return Chem.MolToSmiles(mol, canonical=False, doRandom=True, isomericSmiles=False)
+        return Chem.MolToSmiles(mol, canonical=False, doRandom=True, isomericSmiles=isomericSmiles)
     elif random_type == "restricted":
         new_atom_order = list(range(mol.GetNumAtoms()))
         random.shuffle(new_atom_order)
         random_mol = Chem.RenumberAtoms(mol, newOrder=new_atom_order)
-        return Chem.MolToSmiles(random_mol, canonical=False, isomericSmiles=False)
+        return Chem.MolToSmiles(random_mol, canonical=False, isomericSmiles=isomericSmiles)
     elif random_type == 'rotated':
         n_atoms = mol.GetNumAtoms()
         rotation_index = random.randint(0, n_atoms-1)
         atoms = list(range(n_atoms))
         new_atoms_order = (atoms[rotation_index%len(atoms):]+atoms[:rotation_index%len(atoms)])
         rotated_mol = Chem.RenumberAtoms(mol,new_atoms_order)
-        return Chem.MolToSmiles(rotated_mol, canonical=False, isomericSmiles=False )
+        return Chem.MolToSmiles(rotated_mol, canonical=False, isomericSmiles=isomericSmiles)
     raise ValueError("Type '{}' is not valid".format(random_type))
 
 # Cell
