@@ -10,3 +10,4 @@ import random
 import pkg_resources
 
 from rxnfp.models import SmilesClassificationModel
+from rxnfp.tokenization import SmilesTokenizer
