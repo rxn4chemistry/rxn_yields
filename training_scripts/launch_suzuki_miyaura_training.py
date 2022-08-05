@@ -10,7 +10,8 @@ import pandas as pd
 from tqdm import tqdm
 from typing import List
 
-from rxn_yields.core import SmilesTokenizer, SmilesClassificationModel
+from rxn_yields.core import SmilesClassificationModel
+from rxnfp.tokenization import SmilesTokenizer
 import sklearn
 try:
     import wandb
